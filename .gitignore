@@ -1,0 +1,6 @@
+node_modules/
+target/
+test-results/
+.idea/
+.vscode/
+.DS_Store

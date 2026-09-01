@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Modern Shop</title>
+    <style>body {
+        font-family: Arial;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        margin: 0
+    }
+
+    .wrap {
+        max-width: 1100px;
+        margin: auto;
+        padding: 20px
+    }
+
+    .hero {
+        color: #fff;
+        text-align: center
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px
+    }
+
+    .card, .cart {
+        background: #fff;
+        border-radius: 18px;
+        padding: 18px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, .15)
+    }
+
+    .search-wrap {
+        margin: 0 0 20px;
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+        padding: 14px 16px
+    }
+
+    .search-wrap label {
+        display: block;
+        color: #fff;
+        margin-bottom: 8px;
+        font-weight: 700
+    }
+
+    .search-wrap input {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 16px
+    }
+
+    .status {
+        margin: 0 0 16px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        padding: 12px 14px;
+        color: #2b2b2b;
+        font-weight: 700
+    }
+
+    button {
+        background: #667eea;
+        color: #fff;
+        border: none;
+        padding: 10px 14px;
+        border-radius: 10px;
+        cursor: pointer
+    }
+
+    .top {
+        display: grid;
+        grid-template-columns:3fr 1fr;
+        gap: 20px
+    }
+
+    .emoji {
+        font-size: 60px
+    }</style>
+</head>
+<body>
+<div class="wrap">
+    <div class="hero"><h1>🛒 Modern Shopping Cart</h1>
+        <p>Capstone Demo Application</p></div>
+    <div class="search-wrap">
+        <label for="search">Search products</label>
+        <input id="search" type="search" placeholder="Search by product name" aria-label="Search products">
+    </div>
+    <div class="status" id="status" hidden></div>
+    <div class="top">
+        <div>
+            <div class="grid" id="products"></div>
+        </div>
+        <div class="cart"><h3>Cart</h3>
+            <div id="items"></div>
+            <h2>₹ <span id="total">0</span></h2>
+            <button onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>
