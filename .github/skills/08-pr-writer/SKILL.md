@@ -15,7 +15,7 @@ When the implementation is complete:
 3. Push the branch to the remote repository.
 4. Create a Pull Request against the target branch.
 5. Generate the PR description using the template below.
-6. Include test evidence from local execution or CI pipeline.
+6. Include test evidence from verification-report.md.
 7. Add changelog information if the repository requires it.
 8. Add a reviewer checklist before submitting the PR.
 
@@ -41,15 +41,4 @@ Example:
 
 ### Test Evidence
 
-Paste actual test execution results.
-
-Example:
-
-```text
-npm test
-
-PASS tests/UserProfile.test.ts
-PASS tests/UserService.test.ts
-
-Test Suites: 2 passed, 2 total
-Tests:       18 passed, 18 total
+Paste test evidence from verification-report.md.
