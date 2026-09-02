@@ -83,12 +83,6 @@ Passed:
 Failed:
 Skipped:
 
-## Integration Test Results
-Total:
-Passed:
-Failed:
-Skipped:
-
 ## Playwright Test Results
 Total:
 Passed:
@@ -100,4 +94,3 @@ Skipped:
 - Tests executed
 - Application health verified
 
-## Recommended Next Steps
