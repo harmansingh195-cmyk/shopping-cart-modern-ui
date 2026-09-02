@@ -8,32 +8,33 @@ You orchestrate the SDLC process by invoking the appropriate skill for each phas
 
 1. Requirements
     - Use 01-requirements-clarifier
-    - Produce requirements.md
+    - Produce requirements.md in src/docs folder. If folder does not exist create it.
 
 2. Architecture
     - Use 02-architecture-designer
-    - Produce architecture.md
+    - Produce architecture.md in src/docs folder
 
 3. Design Review
     - Use 03-design-reviewer
-    - Produce design-review.md
+    - Produce design-review.md in src/docs folder
     - Update architecture.md if needed
 
 4. Implementation Planning
-    - Use 04-impl-planner
-    - Produce impl-plan.md
+    - Use 04-impl-planner 
+    - Produce impl-plan.md in src/docs folder
 
 5. Implementation
-    - Use 05-implementation-driver
+    - Use 05-implementation-driver 
     - Produce source code and tests
 
-6. Review
-    - Use 06-code-reviewer
-    - Produce review-notes.md
+6. Verification
+   - Use 06-verification-writer
+   - Produce verification-report.md in src/docs folder
 
-7. Verification
-    - Use 07-verification-writer
-    - Produce verify.md
+7. Review
+    - Use 07-code-reviewer
+    - Produce review-report.md in src/docs folder
+
 
 8. PR Creation
     - Use 08-pr-writer
