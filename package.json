@@ -1,0 +1,24 @@
+{
+  "name": "shopping-cart-modern-ui2",
+  "version": "1.0.0",
+  "description": "A lightweight Spring Boot shopping cart demo with a modern storefront UI and product search functionality. The app serves a product catalog from a REST endpoint and renders the storefront in the browser using plain JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harmansingh195-cmyk/shopping-cart-modern-ui.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/harmansingh195-cmyk/shopping-cart-modern-ui/issues"
+  },
+  "homepage": "https://github.com/harmansingh195-cmyk/shopping-cart-modern-ui#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1"
+  }
+}
