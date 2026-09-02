@@ -5,8 +5,6 @@ description: 'Reviews current changes before PR and writes review-report.md with
 
 ## Purpose
 
-Act as a Senior Software Engineer performing a peer code review before PR creation.
-
 Review the implementation and generate review-report.md.
 
 ---

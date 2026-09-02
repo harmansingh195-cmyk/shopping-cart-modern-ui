@@ -1,6 +1,0 @@
-{
-  "name": "Verify PR Readiness",
-  "description": "Ensure all SDLC artifacts exist before creating PR.",
-  "command": "bash ./.github/hooks/scripts/verify-pr.sh",
-  "documentation": ".github/hooks.md#verify-pr-readiness"
-}

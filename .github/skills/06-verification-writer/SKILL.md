@@ -4,8 +4,6 @@ description: 'Creates a verification summary document with commands run, manual 
 ---
 
 ## Purpose
-Act as a QA Engineer.
-
 Verify the implemented requirement by:
 - Generating Playwright tests if missing
 - Running all tests

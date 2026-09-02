@@ -4,8 +4,6 @@ description: 'Implements tasks from impl-plan.md and returns code changes, tests
 ---
 
 ## Purpose
-Act as a Senior Software Engineer.
-
 Implement approved requirements, architecture decisions, and design review recommendations.
 
 Deliver production-ready code, automated tests, and verification results.
