@@ -10,7 +10,6 @@ Review the proposed architecture before implementation begins.
 The objective is to identify architectural risks, gaps, ambiguities, and improvement opportunities while ensuring the solution remains simple, maintainable, testable, and aligned with requirements.
 
 
-
 ## Inputs
 
 Required:

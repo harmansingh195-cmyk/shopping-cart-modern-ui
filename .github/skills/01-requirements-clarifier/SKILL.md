@@ -3,7 +3,7 @@ name: 01-requirements-clarifier
 description: 'Converts a user story into a structured requirements document with clarifying questions, assumptions, functional requirements, non-functional requirements, acceptance criteria, and out-of-scope items.'
 ---
 
-## Goal
+## Purpose
 Convert the provided user story into `requirements.md`.
 
 ## Inputs needed (ask if missing)

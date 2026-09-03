@@ -3,9 +3,6 @@ name: 02-architecture-designer
 description: 'Creates an architecture document aligned to requirements.md and the existing repository structure.'
 ---
 
-## Goal
-Create architecture.md aligned to requirements.md and the existing repo.
-
 ## Purpose
 
 Design the high-level system architecture based on requirements.md.
