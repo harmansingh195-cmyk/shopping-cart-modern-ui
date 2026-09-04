@@ -8,7 +8,7 @@
         "type": "command",
         "matcher": "create|edit",
         "bash": "python3 .github/hooks/scripts/guard_docs.py",
-        "powershell": "python3 .github/hooks/scripts/guard_docs.py",
+        "powershell": "python .github/hooks/scripts/guard_docs.py",
         "cwd": ".",
         "timeoutSec": 10
       }

@@ -41,6 +41,7 @@ You do not perform requirements analysis, architecture design, implementation, t
 7. Review
     - Use 07-code-review-agent
     - Produce review-report.md
+    - If any changes are needed, recall Implementation and Verification phases
 
 8. PR Creation
     - Use 08-pr-agent

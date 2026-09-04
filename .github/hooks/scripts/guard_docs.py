@@ -2,20 +2,14 @@
 """
 preToolUse hook (matcher: "create|edit")
 
-Technical backstop for the SDLC "one phase at a time" rule. Before a phase
-agent is allowed to create/edit one of the later SDLC artifacts, this
-confirms the artifact(s) from the required earlier phase already exist on
-disk. Phase agents already carry this rule in their own instructions; this
-hook makes it non-optional in case an agent is invoked out of order,
-directly by name, or by a future automation that skips the orchestrator.
+Checks SDLC document prerequisites based ONLY on the target file path.
 
-Only targets files under src/docs/*.md; every other create/edit call
-(source code, tests, etc.) is left untouched.
 """
+
 import json
-import re
 import sys
 from pathlib import Path
+
 
 DOC_PRECONDITIONS = {
     "architecture.md": ["requirements.md"],
@@ -25,48 +19,137 @@ DOC_PRECONDITIONS = {
     "pr-description.md": ["review-report.md"],
 }
 
+
 def emit(decision, reason=None):
-    out = {"permissionDecision": decision}
+    result = {
+        "permissionDecision": decision
+    }
+
     if reason:
-        out["permissionDecisionReason"] = reason
-    print(json.dumps(out))
+        result["permissionDecisionReason"] = reason
+
+    print(json.dumps(result))
     sys.exit(0)
+
+
+def find_target_path(tool_args):
+    """
+    Extract the target file path from known path-related fields only.
+
+    Never search arbitrary serialized tool arguments because that could
+    accidentally match paths contained inside the file content.
+    """
+
+    if not isinstance(tool_args, dict):
+        return None
+
+    path_keys = {
+        "path",
+        "filePath",
+        "file_path",
+        "targetPath",
+        "target_path",
+        "filename",
+        "fileName",
+        "file_name",
+        "destination",
+        "destinationPath",
+        "destination_path",
+    }
+
+    def search(value):
+        if isinstance(value, dict):
+            for key, child in value.items():
+                if key in path_keys and isinstance(child, str):
+                    return child
+
+                result = search(child)
+                if result:
+                    return result
+
+        elif isinstance(value, list):
+            for item in value:
+                result = search(item)
+                if result:
+                    return result
+
+        return None
+
+    return search(tool_args)
+
 
 def main():
     try:
         payload = json.load(sys.stdin)
     except Exception:
+        # Fail open if the hook payload cannot be parsed.
         emit("allow")
         return
 
     cwd = payload.get("cwd") or "."
-    tool_args = payload.get("toolArgs", payload.get("tool_input", {}))
-    # The exact key holding the destination path varies by client, so search
-    # the whole serialized args for a src/docs/*.md reference instead of
-    # depending on one field name.
-    blob = json.dumps(tool_args) if not isinstance(tool_args, str) else tool_args
-    match = re.search(r"src[/\\]docs[/\\]([A-Za-z0-9_.-]+\.md)", blob)
-    if not match:
+
+    tool_args = payload.get(
+        "toolArgs",
+        payload.get("tool_input", {})
+    )
+
+    # IMPORTANT:
+    # Only inspect the actual target path.
+    target_path = find_target_path(tool_args)
+
+    if not target_path:
         emit("allow")
         return
 
-    target = match.group(1)
+    # Normalize Windows paths.
+    normalized = target_path.replace("\\", "/")
+
+    # Only apply this hook to src/docs/*.md.
+    if not normalized.startswith("src/docs/"):
+        emit("allow")
+        return
+
+    if not normalized.lower().endswith(".md"):
+        emit("allow")
+        return
+
+    target = Path(normalized).name
+
+    # requirements.md has no prerequisite.
+    # Therefore it is always allowed.
     required = DOC_PRECONDITIONS.get(target)
+
     if not required:
         emit("allow")
         return
 
     docs_dir = Path(cwd) / "src" / "docs"
-    missing = [r for r in required if not (docs_dir / r).exists()]
+
+    # ONLY check file existence.
+    missing = [
+        document
+        for document in required
+        if not (docs_dir / document).is_file()
+    ]
+
     if missing:
+        missing_paths = ", ".join(
+            f"src/docs/{document}"
+            for document in missing
+        )
+
         emit(
             "deny",
-            f"src/docs/{target} until {', '.join('src/docs/' + m for m in missing)} "
-            f"Do not exist. Run the earlier SDLC phase(s) first.",
+            f"Blocked by SDLC phase gate: cannot write "
+            f"src/docs/{target} because the required document(s) "
+            f"do not exist: {missing_paths}. "
+            f"Run the earlier SDLC phase(s) first."
         )
+
         return
 
     emit("allow")
+
 
 if __name__ == "__main__":
     main()
